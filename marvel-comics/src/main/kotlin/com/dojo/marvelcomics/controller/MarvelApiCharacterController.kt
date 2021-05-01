@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController
 class MarvelApiCharacterController(val service: MarvelApiService) {
     private val logger = LoggerFactory.getLogger(this::class.java)
 
-    @GetMapping("/characters")
+    @GetMapping("/character")
     fun getMarvelCharacters(
         @RequestParam(value = "name", required = false) name: String?,
         @RequestParam(value = "nameStartsWith", required = false) nameStartsWith: String?,
@@ -42,7 +42,7 @@ class MarvelApiCharacterController(val service: MarvelApiService) {
             logger.info("Get all public characters from API")
         }
 
-    @GetMapping("/characters/{characterId}")
+    @GetMapping("/character/{characterId}")
     fun getMarvelCharacterById(
         @RequestParam(value = "characterId") characterId: String
     ): ResponseEntity<*> =

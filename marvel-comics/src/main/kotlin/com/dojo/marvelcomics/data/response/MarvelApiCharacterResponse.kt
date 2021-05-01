@@ -79,6 +79,7 @@ data class Thumbnail(
 
     @SerializedName("path") val path: String,
     @SerializedName("extension") val extension: String
+
 )
 
 data class Urls(
