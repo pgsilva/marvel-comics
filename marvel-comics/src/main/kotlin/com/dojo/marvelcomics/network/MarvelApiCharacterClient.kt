@@ -2,13 +2,14 @@ package com.dojo.marvelcomics.network
 
 import com.dojo.marvelcomics.data.ApiConstants.MARVEL_API_KEY
 import com.dojo.marvelcomics.data.ApiConstants.MARVEL_API_URL
-import com.dojo.marvelcomics.data.response.MarvelApiResponse
+import com.dojo.marvelcomics.data.response.MarvelApiCharacterResponse
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestParam
 
 @FeignClient(value = "marvelApiClient", url = MARVEL_API_URL)
-interface MarvelApiClient {
+interface MarvelApiCharacterClient {
 
     @GetMapping("v1/public/characters")
     fun getPublicCharacters(
@@ -25,5 +26,13 @@ interface MarvelApiClient {
         @RequestParam(value = "orderBy", required = false) orderBy: String?,
         @RequestParam(value = "limit", required = false) limit: String?,
         @RequestParam(value = "offset", required = false) offset: String?
-    ): MarvelApiResponse
+    ): MarvelApiCharacterResponse
+
+    @GetMapping("/v1/public/characters/{characterId}")
+    fun getPublicCharacterById(
+        @RequestParam(value = "apikey", defaultValue = MARVEL_API_KEY) apikey: String,
+        @RequestParam(value = "hash") hash: String,
+        @RequestParam(value = "ts") ts: String,
+        @PathVariable(value = "characterId") characterId: String?
+    ): MarvelApiCharacterResponse
 }

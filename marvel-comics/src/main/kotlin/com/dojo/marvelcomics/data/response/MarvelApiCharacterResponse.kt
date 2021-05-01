@@ -3,7 +3,7 @@ package com.dojo.marvelcomics.data.response
 import com.google.gson.annotations.SerializedName
 
 
-data class MarvelApiResponse(
+data class MarvelApiCharacterResponse(
     @SerializedName("code") val code: Int,
     @SerializedName("status") val status: String,
     @SerializedName("copyright") val copyright: String,

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class MarvelApiController(val service: MarvelApiService) {
+class MarvelApiCharacterController(val service: MarvelApiService) {
     private val logger = LoggerFactory.getLogger(this::class.java)
 
     @GetMapping("/characters")
@@ -40,5 +40,17 @@ class MarvelApiController(val service: MarvelApiService) {
             )
         ).also {
             logger.info("Get all public characters from API")
+        }
+
+    @GetMapping("/characters/{characterId}")
+    fun getMarvelCharacterById(
+        @RequestParam(value = "characterId") characterId: String
+    ): ResponseEntity<*> =
+        ResponseEntity.ok(
+            service.characterById(
+                characterId = characterId
+            )
+        ).also {
+            logger.info("Get public character by id from API")
         }
 }
